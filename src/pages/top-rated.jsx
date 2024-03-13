@@ -59,14 +59,18 @@ const Toprated = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
   const [selectedMovie, setSelectedMovie] = useState({});
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(null);
   const url =
-    "https://api.themoviedb.org/3/movie/top_rated?api_key=8adb22a497bd258ef5ac7c8fac43cd5b";
+    "https://api.themoviedb.org/3/movie/top_rated";
+
+
 
   useEffect(() => {
     async function displayAllMovies() {
       try {
-        const response = await axios.get(url);
+        const response = await axios.get(url, { headers: {
+          Authorization  : `Bearer ${process.env.REACT_APP_ACCESS_TOKEN_API_KEY}`
+        }});
         const responseJson = response.data.results; // Access the 'results' property
         console.log("response", responseJson);
         setMovies(responseJson);
@@ -77,7 +81,11 @@ const Toprated = () => {
     displayAllMovies();
   }, []);
 
+
+  if(!movies){
+    return <h1>Loading</h1>
   
+  }
 
   const handleOpenModal = (id) => {
     setSelectedMovieId(id);
@@ -94,6 +102,8 @@ const Toprated = () => {
       </section>
 
       <section className="flex flex-row gap-5 flex-wrap justify-center">
+
+        
         {/* Movie card */}
         <div className="shadow-md" onClick={() => handleOpenModal(1)}>
           <img

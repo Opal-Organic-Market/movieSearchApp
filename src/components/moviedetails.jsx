@@ -24,10 +24,12 @@ const Moviedetails = () => {
     <div className="grid grid-cols-8 gap-4">
       {movieList.map((item, index) => (
         <div key={index} className="rounded">
+          <a href={''} target="_blank" rel="noopener noreferrer">
           <img
             src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
             alt="movie"
           />
+          </a>
           <h2 className="overflow-hidden">{item.original_title}</h2>
         </div>
       ))}

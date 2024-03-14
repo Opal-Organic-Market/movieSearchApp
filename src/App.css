@@ -1,0 +1,24 @@
+.App {
+    text-align: center;
+}
+
+form {
+    display: inline-flex;
+    gap: 1rem;
+    align-items: center; 
+}
+
+.search_input {
+    padding: 0.5rem;
+    outline: indigo;
+}
+
+.search_input, .submit_btn {
+    border-radius: 1rem;
+}
+
+.submit_btn {
+    padding: 0.5rem;
+    background-color: indigo;
+    color: white;
+}

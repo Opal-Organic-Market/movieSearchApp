@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 const Toprated = () => {
   const [movies, setMovies] = useState(null);
   const url = "https://api.themoviedb.org/3/movie/top_rated";
@@ -36,40 +36,41 @@ const Toprated = () => {
 
   return (
     <>
-      <div className="px-8 mx-auto flex flex-col gap-10">
-        <section>
-          <h1 className="text-2xl font-bold">Top Rated</h1>
-        </section>
+          <div>
+            {/* add browse for more so when user clicks on it it shows all movies */}
 
-        <section className="grid grid-cols-5 gap-5 justify-center">
-          {movies.map((item) => (
-            <div key={item.id} className="shadow-md relative">
-              <div className="text-center relative">
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                  alt={item.title}
-                  width="250px"
-                  height="350px"
-                  style={{borderRadius:"10px"}}
-                />
-                <button
+      <div className="flex justify-center mt-9">
+        <div className="container"> <span className="font-extrabold	">Top-Rated</span>
+          <div className=" flex overflow-auto gap-x-2  ">
+            {movies.map((item, index) => (
+              <div key={index} className="flex-shrink-0 ">
+                <Link to={'/moviedetailspage/' + item.id}>
+                <div className=" w-48 h-auto p-4 rounded-md ">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                    alt="movies"
+                    className="h-64 rounded-md "
+                  />
+                  
+                  <h2 className="mt-2 text-base font-semibold truncate h-7" >
+                  {/* <button
                   className="bg-orange-500 rounded-md px-1 py-1 text-white absolute bottom-0 left-0 right-0 mx-auto mb-1 text-xs"
                   style={{ width: "80px" }}
                   onClick={() => handleRateButtonClick(item.vote_average)}
                 >
                   RATING: {item.vote_average.toFixed(1)}
                 </button>
+                    */}
+                    {item.original_title} 
+                  </h2>
+                </div>
+                </Link>
               </div>
-              <div className="text-center">
-                <h2 className="text-md font-semibold text-ellipsis mb-1">
-                  {item.title}
-                </h2>
-                <p>{item.release_year}</p>
-              </div>
-            </div>
-          ))}
-        </section>
+            ))}
+          </div>
+        </div>
       </div>
+    </div>
     </>
   );
 };
